@@ -36,13 +36,14 @@ public class QmstrPackTask extends QmstrTask {
                 .forEach(c -> c.getAllArtifacts().forEach(art -> arts.put(art, c.getResolvedConfiguration().getFiles())));
 
         bsc.SendBuildFileNodes(arts.entrySet().parallelStream()
-                .map(artEntry -> FilenodeUtils.processArtifact(artEntry.getKey(), artEntry.getValue()))
+                .map(artEntry -> FilenodeUtils.processArtifact(artEntry.getKey().getFile(), artEntry.getValue()))
                 .filter(o -> o.isPresent())
                 .map(o -> o.get())
                 .collect(Collectors.toSet())); 
         
     
     }
+
 }
 
 
